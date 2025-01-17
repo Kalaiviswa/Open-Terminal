@@ -42,7 +42,7 @@ def post_data():
             return render_template('post_data.html', error=error_message)
 
         # Create the response message
-        message = f"Order received: {quantity} of {symbol} on {exchange} as {order_type}."
+        message = f"Order received: {quantity} units of {symbol} on {exchange} as {order_type} order."
         if request.is_json:
             return jsonify({"message": message})
 
