@@ -9,6 +9,20 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
         <h1 class="text-2xl font-bold mb-6 text-center text-gray-700">Submit Data</h1>
+
+        <!-- Success or Error Message -->
+        {% if message %}
+        <div class="p-4 rounded mb-4 {{ 'bg-green-100 text-green-700' if 'Buy' in message else 'bg-red-100 text-red-700' }}">
+            {{ message }}
+        </div>
+        {% endif %}
+        
+        {% if error %}
+        <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+            {{ error }}
+        </div>
+        {% endif %}
+
         <form action="/post-data" method="POST" class="space-y-4">
             <div>
                 <label for="symbol" class="block text-sm font-medium text-gray-600">Symbol:</label>
@@ -31,6 +45,23 @@
                     <option value="NFO">NFO</option>
                     <option value="MCX">MCX</option>
                 </select>
+            </div>
+
+            <!-- Buy or Sell Radio Buttons -->
+            <div>
+                <label class="block text-sm font-medium text-gray-600">Order Type:</label>
+                <div class="flex items-center">
+                    <label for="buy" class="mr-4">
+                        <input type="radio" id="buy" name="order_type" value="Buy" required 
+                            class="mr-2">
+                        Buy
+                    </label>
+                    <label for="sell">
+                        <input type="radio" id="sell" name="order_type" value="Sell" required 
+                            class="mr-2">
+                        Sell
+                    </label>
+                </div>
             </div>
 
             <div class="text-center">

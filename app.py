@@ -24,17 +24,17 @@ def post_data():
         symbol = request.form.get('symbol')
         quantity = request.form.get('quantity')
         exchange = request.form.get('exchange')
+        order_type = request.form.get('order_type')
 
-        if not all([symbol, quantity, exchange]):
-            return jsonify({"error": "All fields are required!"}), 400
+        if not all([symbol, quantity, exchange, order_type]):
+            error_message = "All fields are required!"
+            return render_template('post_data.html', error=error_message)
 
-        # Respond with the received data
-        return jsonify({
-            "message": "Data received successfully!",
-            "symbol": symbol,
-            "quantity": quantity,
-            "exchange": exchange
-        })
+        # Create a success message with the order type
+        message = f"Order received: {quantity} of {symbol} on {exchange} as {order_type}."
+
+        # Pass the data back to the template
+        return render_template('post_data.html', message=message)
 
     # Render the form
     return render_template('post_data.html')
